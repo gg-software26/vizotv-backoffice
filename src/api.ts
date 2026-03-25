@@ -5,9 +5,20 @@ const headers = () => ({
   "X-Backoffice-Secret": BACKOFFICE_SECRET,
 });
 
+export interface ClientMetadata {
+  platform?: string;
+  platform_version?: string | number;
+  is_pad?: boolean;
+  is_tv?: boolean;
+  model?: string;
+  brand?: string;
+  system_name?: string;
+}
+
 export interface Client {
   id: string;
   api_key: string;
+  metadata: ClientMetadata | null;
 }
 
 export interface Recording {
