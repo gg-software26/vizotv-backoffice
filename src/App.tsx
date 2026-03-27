@@ -15,7 +15,10 @@ function ProtectedApp() {
   return (
     <div className="app">
       <header className="header">
-        <span className="logo">VizoTV Backoffice</span>
+        <span className="logo">
+          <img src="/favicon.png" alt="VizoTV" style={{ height: "28px", verticalAlign: "middle", marginRight: "8px" }} />
+          VizoTV Backoffice
+        </span>
         <nav className="nav">
           <NavLink to="/clients" className={({ isActive }) => `nav-btn ${isActive ? "active" : ""}`}>
             Clients
