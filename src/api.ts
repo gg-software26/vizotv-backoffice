@@ -1,9 +1,14 @@
-import { SERVER_URL, BACKOFFICE_SECRET } from "./config";
+import { SERVER_URL } from "./config";
 
-const headers = () => ({
-  "Content-Type": "application/json",
-  "X-Backoffice-Secret": BACKOFFICE_SECRET,
-});
+const TOKEN_KEY = "backoffice_token";
+
+const headers = (): Record<string, string> => {
+  const token = localStorage.getItem(TOKEN_KEY);
+  return {
+    "Content-Type": "application/json",
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+};
 
 export interface ClientMetadata {
   platform?: string;
@@ -42,6 +47,7 @@ export interface Recording {
 
 export async function fetchClients(): Promise<Client[]> {
   const res = await fetch(`${SERVER_URL}/api/backoffice/clients`, { headers: headers() });
+  if (res.status === 401) throw new Error("401");
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
   return res.json();
 }
@@ -54,6 +60,7 @@ export async function fetchRecordings(params?: {
   if (params?.client_id) url.searchParams.set("client_id", params.client_id);
   if (params?.status) url.searchParams.set("status", params.status);
   const res = await fetch(url.toString(), { headers: headers() });
+  if (res.status === 401) throw new Error("401");
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
   return res.json();
 }

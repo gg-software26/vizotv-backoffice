@@ -33,6 +33,7 @@
 .nav {
   display: flex;
   gap: 0.25rem;
+  flex: 1;
 }
 
 .nav-btn {
