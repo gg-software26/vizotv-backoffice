@@ -203,6 +203,7 @@ tbody tr:hover td {
   white-space: nowrap;
 }
 
+.badge-queued    { background: #7c3aed22; color: #a78bfa; border: 1px solid #7c3aed44; }
 .badge-recording { background: #16a34a22; color: #4ade80; border: 1px solid #16a34a44; }
 .badge-completed { background: #1d4ed822; color: #60a5fa; border: 1px solid #1d4ed844; }
 .badge-failed    { background: #dc262622; color: #f87171; border: 1px solid #dc262644; }

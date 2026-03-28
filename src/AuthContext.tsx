@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { SERVER_URL } from "./config";
+import { setUnauthorizedHandler } from "./api";
 
 const TOKEN_KEY = "backoffice_token";
 
@@ -14,6 +15,15 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(() => localStorage.getItem(TOKEN_KEY));
 
+  function logout() {
+    localStorage.removeItem(TOKEN_KEY);
+    setToken(null);
+  }
+
+  useEffect(() => {
+    setUnauthorizedHandler(logout);
+  }, []);
+
   async function login(code: string, redirectUri: string) {
     const res = await fetch(`${SERVER_URL}/api/backoffice/auth/google`, {
       method: "POST",
@@ -27,11 +37,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { access_token } = await res.json();
     localStorage.setItem(TOKEN_KEY, access_token);
     setToken(access_token);
-  }
-
-  function logout() {
-    localStorage.removeItem(TOKEN_KEY);
-    setToken(null);
   }
 
   return <AuthContext.Provider value={{ token, login, logout }}>{children}</AuthContext.Provider>;
