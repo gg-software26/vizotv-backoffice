@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchRecordings, fetchClients, type Recording, type Client } from "../api";
 
-const STATUS_OPTIONS = ["", "recording", "completed", "failed", "stopping", "expired"];
+const STATUS_OPTIONS = ["", "queued", "recording", "completed", "failed", "stopping", "expired"];
 
 function formatBytes(n: number | null) {
   if (n == null) return "—";
