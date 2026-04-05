@@ -44,7 +44,7 @@ export interface Recording {
   title: string;
   channel_name: string | null;
   channel_logo: string | null;
-  status: "queued" | "recording" | "completed" | "failed" | "stopping" | "expired";
+  status: "queued" | "recording" | "completed" | "failed" | "stopping" | "expired" | "deleted";
   file_name: string | null;
   file_size: number | null;
   duration: number | null;

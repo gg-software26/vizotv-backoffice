@@ -209,6 +209,7 @@ tbody tr:hover td {
 .badge-failed    { background: #dc262622; color: #f87171; border: 1px solid #dc262644; }
 .badge-stopping  { background: #ca8a0422; color: #fbbf24; border: 1px solid #ca8a0444; }
 .badge-expired   { background: #52525222; color: #71717a; border: 1px solid #52525244; }
+.badge-deleted   { background: #7f1d1d22; color: #fca5a5; border: 1px solid #7f1d1d44; }
 
 /* State messages */
 .state-msg {
